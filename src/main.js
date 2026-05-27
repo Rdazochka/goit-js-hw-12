@@ -46,6 +46,9 @@ formEl.addEventListener('submit', async e => {
     createGallery(images.hits);
     if (images.totalHits <= 15) {
       hideLoadMoreButton();
+      iziToast.error({
+        message: "We're sorry, but you've reached the end of search results.",
+      });
     } else {
       showLoadMoreButton();
     }
@@ -64,13 +67,14 @@ loadMoreBtnEl.addEventListener('click', async () => {
   page += 1;
   if (!currentQuery) return;
   showLoader();
+  hideLoadMoreButton();
   try {
     const images = await getImagesByQuery(currentQuery, page);
 
     if (images.hits.length === 0) {
+      hideLoadMoreButton();
       iziToast.error({
-        message:
-          'Sorry, there are no images matching your search query. Please try again!',
+        message: "We're sorry, but you've reached the end of search results.",
       });
       return;
     }
@@ -87,6 +91,8 @@ loadMoreBtnEl.addEventListener('click', async () => {
         iziToast.error({
           message: "We're sorry, but you've reached the end of search results.",
         });
+      } else {
+        showLoadMoreButton();
       }
   } catch (error) {
     iziToast.error({
