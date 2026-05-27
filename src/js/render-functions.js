@@ -4,6 +4,7 @@ import 'simplelightbox/dist/simple-lightbox.min.css';
 const refs = {
   gallery: document.querySelector('.gallery'),
   loader: document.querySelector('.loader'),
+  loadMore: document.querySelector('.load-more-btn'),
 };
 
 const lightbox = new SimpleLightbox('.gallery a');
@@ -55,4 +56,16 @@ export function showLoader() {
 }
 export function hideLoader() {
   refs.loader.classList.add('hidden');
+}
+
+// Ця функція нічого не приймає, повинна додавати
+// клас для відображення кнопки Load more.Нічого не повертає.
+export function showLoadMoreButton() {
+  refs.loadMore.classList.remove('hidden');
+}
+
+// Ця функція нічого не приймає, повинна прибирати
+// клас для відображення кнопки Load more.Нічого не повертає.
+export function hideLoadMoreButton() {
+  refs.loadMore.classList.add('hidden');
 }
